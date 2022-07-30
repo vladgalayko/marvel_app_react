@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Spiner from '../../components/spinner/Spinner'
 import ErrorMassage from '../errorMassage/ErrorMassage';
-import MarvelServices from '../../services/MarvelService';
+import MarvelService from '../../services/MarvelService';
 
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
@@ -13,7 +13,7 @@ class RandomChar extends Component {
         error: false
     }
 
-    MarvelService = new MarvelServices();
+    MarvelService = new MarvelService();
 
     componentDidMount() {
         this.updateChar();

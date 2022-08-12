@@ -1,4 +1,4 @@
-import { Component } from "react/cjs/react.production.min";
+import { Component } from 'react'
 import ErrorMassage from "../errorMassage/ErrorMassage";
 
 class ErrorBoundary extends Component {

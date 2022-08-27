@@ -1,4 +1,5 @@
 import { useState, useEffect} from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import {Link} from 'react-router-dom';
 import Spinner from '../spinner/Spinner';
 import ErrorMassage from '../errorMassage/ErrorMassage';
@@ -37,7 +38,8 @@ const ComicsList = (props) => {
     function renderComics(arr) {
         const items =  arr.map((item, i) => { 
             return (
-            <li className="comics__item"
+            <CSSTransition key={item.id} timeout={500} classNames="comics__item">
+                <li className="comics__item"
                 key={i}>
                 <Link to={`/comics/${item.id}`}>
                     <img src={item.thumbnail} alt={item.title} className="comics__item-img"/>
@@ -45,12 +47,15 @@ const ComicsList = (props) => {
                     <div className="comics__item-price">{item.price}</div>
                 </Link>
             </li>
+            </CSSTransition>
             )
         });
 
         return (
             <ul className="comics__grid">
-                {items}
+                <TransitionGroup component={null}>
+                    {items}
+                </TransitionGroup>
             </ul>
         )
     }

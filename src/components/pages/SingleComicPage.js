@@ -1,8 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect} from 'react';
+import AppBanner from "../appBanner/AppBanner";
 import useMarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
-import ErrorMassage from '../errorMassage/ErrorMassage';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 import './singleComicPage.scss';
 
 const SingleComicPage = () => {
@@ -25,7 +26,7 @@ const SingleComicPage = () => {
         setComic(comic)  
     } 
 
-    const errorMassage = error ? <ErrorMassage/> : null;
+    const errorMassage = error ? <ErrorMessage/> : null;
     const spinner = loading ? <Spinner/> : null;
     const content = !(loading || error || !comic) ? <View comic={comic}/> : null;
 
@@ -40,8 +41,9 @@ const SingleComicPage = () => {
 
 const View = ({comic}) => {
     const {title, thumbnail, price, description, pageCount, language} = comic;
-
     return (
+        <>
+        <AppBanner/>
         <div className="single-comic">
             <img src={thumbnail} alt={title} className="single-comic__img"/>
             <div className="single-comic__info">
@@ -53,6 +55,7 @@ const View = ({comic}) => {
             </div>
             <Link to="/comics" className="single-comic__back">Back to all</Link>
         </div>
+        </>
     )
 }
 export default SingleComicPage;

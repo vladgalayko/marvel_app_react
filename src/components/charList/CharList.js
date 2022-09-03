@@ -2,7 +2,7 @@ import { useState, useEffect, useRef} from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Spinner from '../spinner/Spinner';
 import PropTypes from 'prop-types'
-import ErrorMassage from '../errorMassage/ErrorMassage';
+import ErrorMassage from '../errorMessage/ErrorMessage';
 import useMarvelService from '../../services/MarvelService';
 import './charList.scss';
 

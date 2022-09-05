@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef} from 'react';
+import { useState, useEffect, useRef, useMemo} from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import PropTypes from 'prop-types'
 import useMarvelService from '../../services/MarvelService';
@@ -29,7 +29,7 @@ const CharList = (props) => {
     const [offset, setOffset] = useState(210);
     const [charEnded, setCharEnded] = useState(false);
 
-    const {loading, error, getAllCharacters, process, setProcess} = useMarvelService();
+    const {getAllCharacters, process, setProcess} = useMarvelService();
 
 
     useEffect(() => {
@@ -69,7 +69,7 @@ const CharList = (props) => {
             if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
                 imgStyle = {'objectFit' : 'unset'};
             }
-            
+       
             return (
                <CSSTransition key={item.id} timeout={500} classNames="char__item">
                  <li 
@@ -103,9 +103,14 @@ const CharList = (props) => {
         )
     }
 
+    const elements = useMemo(() => {
+        return setContent(process, () => renderItems(charList), newItemLoading);
+        // eslint-disable-next-line
+    }, [process])
+
     return (
         <div className="char__list">
-            {setContent(process, () => renderItems(charList), newItemLoading)}
+            {elements}
             <button 
                 className="button button__main button__long"
                 disabled={newItemLoading}
